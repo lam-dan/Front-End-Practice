@@ -43,6 +43,73 @@ src/
 - Parent receives updates from child
 - Maintains separation of concerns
 
+## 💬 Interview-Friendly Explanation
+
+**Why do we need callback props?**
+
+React enforces one-way data flow, so the child can't directly change the parent's state. A callback prop lets the parent pass down a function, and the child can call it when it needs to notify the parent of something. The parent decides whether to update state, so the parent remains the single source of truth. This is the standard way to "lift state up" when multiple components need to share or control the same data.
+
+## 🎯 Real-World Use Cases
+
+### 1. **Controlled Form Inputs**
+**Scenario:** Building a form where each field is a separate component.
+
+- **Parent:** Manages the entire form's state
+- **Child:** Individual `<TextInput>` component
+- **Why callback prop?** The child needs to notify the parent when its value changes so the parent can store it in the overall form data
+
+```jsx
+function ParentForm() {
+  const [formData, setFormData] = useState({ name: '' });
+
+  const handleNameChange = (newName) => {
+    setFormData(prev => ({ ...prev, name: newName }));
+  };
+
+  return <TextInput value={formData.name} onValueChange={handleNameChange} />;
+}
+
+function TextInput({ value, onValueChange }) {
+  return <input value={value} onChange={e => onValueChange(e.target.value)} />;
+}
+```
+
+### 2. **Modal or Dialog Close Events**
+**Scenario:** You have a reusable modal component.
+
+- **Parent:** Decides when the modal is shown
+- **Child:** Modal component
+- **Why callback prop?** When the modal's "close" button is clicked, it calls `onClose` so the parent can update its `isOpen` state
+
+```jsx
+<Modal isOpen={showModal} onClose={() => setShowModal(false)} />
+```
+
+### 3. **Custom Buttons or Interactive Components**
+**Scenario:** Building a reusable `<CounterButton>` that tracks clicks internally, but the parent also needs to know the latest count.
+
+- **Parent:** Shows total clicks from multiple counters
+- **Child:** Individual counter button
+- **Why callback prop?** Each child sends its count upward so the parent can sum them
+
+### 4. **Child-Driven Filtering or Sorting**
+**Scenario:** You have a search bar (child) and a results list (parent).
+
+- **Parent:** Holds the filtered data
+- **Child:** Search input
+- **Why callback prop?** When the search text changes, the child calls the callback so the parent can run the filter
+
+### 5. **Game or Interactive Widgets**
+**Scenario:** Building a quiz app.
+
+- **Parent:** Tracks the score
+- **Child:** Individual question component
+- **Why callback prop?** When a user selects an answer, the child calls the callback to update the parent's score
+
+## 📌 Key Pattern Across All Use Cases
+
+**The child is just an interface for user interaction, the parent owns the actual data and uses callback props to stay updated.**
+
 ## 💡 Key Learning Outcomes
 
 1. **Understanding React's unidirectional data flow**
