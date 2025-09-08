@@ -24,11 +24,17 @@ This repository serves as a practice environment for mastering React fundamental
 ## 🏗️ Project Structure
 
 ```
-src/
-├── App.js          # Main application component
-├── Parent.js       # Parent component with state management
-├── Child.js        # Child component that communicates with parent
-└── index.js        # Application entry point
+Front-End-Practice/
+├── create-a-button/           # Current React practice project
+│   ├── src/
+│   │   ├── App.js            # Main application component
+│   │   ├── Parent.js         # Parent component with state management
+│   │   ├── Child.js          # Child component that communicates with parent
+│   │   └── index.js          # Application entry point
+│   ├── package.json          # Dependencies and scripts
+│   └── README.md             # Project-specific documentation
+├── my-app/                   # Previous React practice project
+└── README.md                 # This main documentation file
 ```
 
 ## 🔄 Data Flow Patterns
@@ -140,6 +146,9 @@ git clone git@github.com:yourusername/Front-End-Practice.git
 # Navigate to project directory
 cd Front-End-Practice
 
+# Navigate to the current practice project
+cd create-a-button
+
 # Install dependencies
 npm install
 
@@ -174,6 +183,8 @@ This is a personal practice project, but feel free to:
 - Code includes detailed comments explaining the "why" behind each pattern
 - Focus on understanding the data flow rather than just copying code
 - Experiment with different approaches to reinforce learning
+- **Current project**: `create-a-button/` - Focus on parent-child communication with button interactions
+- **Previous projects**: `my-app/` - Earlier React practice examples
 
 ## 🎓 Next Steps
 
